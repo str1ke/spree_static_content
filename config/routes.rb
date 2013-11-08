@@ -8,7 +8,6 @@ end
 class Spree::StaticPage
   def self.matches?(request)
     slug = StaticPage::remove_spree_mount_point(request.fullpath)
-    pages = Spree::Page.arel_table
     Spree::Page.visible.by_slug(slug).exists?
   end
 end
@@ -20,7 +19,7 @@ class Spree::StaticRoot
   end
 end
 
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.routes.draw do
 
   namespace :admin do
     resources :pages
